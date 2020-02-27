@@ -15,9 +15,10 @@ namespace dezi_clean.Controllers
 {
     public class Marker
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string title { get; set; }
-        public List<Coordinates> coordinates { get; set; } 
+        public Coordinates coordinates { get; set; } 
+
     }
     public class Coordinates
     {
@@ -29,36 +30,37 @@ namespace dezi_clean.Controllers
 
     public class GetAllCordinatesController : ApiController
     {
-
         //Student[] students = new Student[]
         List<Marker> seba = new List<Marker>();
         public  List<Marker> FillData()
         {
-
-          seba.Add(new Marker { id = 1, title = "Naslov1",
-              coordinates = new List<Coordinates>
-          {
-              new Coordinates()
-              {
-                  longitude = "4444444",
-                  latitude = "4444444"
-              }
-          },
-          });
-            seba.Add(new Marker
+            string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
+            using (SqlConnection connection = new SqlConnection(connStr))
+            using (SqlCommand command = new SqlCommand("SELECT TOP (1000) [id],[name],[latitude],[longitude],[aktivan]FROM [dezi-me].[dbo].[Data] where aktivan = 'true'", connection))
             {
-                id = 2,
-                title = "Naslov2",
-                coordinates = new List<Coordinates>
-          {
-              new Coordinates()
-              {
-                  longitude = "5555555",
-                  latitude = "5555555"
-              }
-          },
-            });
-            return seba;
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var id = "";
+                        var title = "";
+                        var longitude = "";
+                        var latitude = "";
+                        //Marker seba = new Marker();
+                        id = reader["id"].ToString();
+                        title = reader["name"].ToString();
+                        longitude = reader["latitude"].ToString();
+                        latitude = reader["longitude"].ToString();
+
+                        seba.Add(new Marker { id = id, title = title, coordinates = new Coordinates() { longitude = longitude, latitude = latitude } });
+
+                    }
+
+                }
+                connection.Close();
+            }
+          return seba;
         }
 
 
