@@ -15,15 +15,15 @@ namespace dezi_clean.Controllers
 {
     public class Marker
     {
-        public string id { get; set; }
+        public int id { get; set; }
         public string title { get; set; }
-        public Coordinates coordinates { get; set; } 
+        public Coordinates coordinates { get; set; }
 
     }
     public class Coordinates
     {
-      public string latitude { get; set; }
-      public string longitude { get; set; }
+        public decimal latitude { get; set; }
+        public decimal longitude { get; set; }
     }
 
 
@@ -32,7 +32,7 @@ namespace dezi_clean.Controllers
     {
         //Student[] students = new Student[]
         List<Marker> seba = new List<Marker>();
-        public  List<Marker> FillData()
+        public List<Marker> FillData()
         {
             string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
             using (SqlConnection connection = new SqlConnection(connStr))
@@ -43,24 +43,35 @@ namespace dezi_clean.Controllers
                 {
                     while (reader.Read())
                     {
-                        var id = "";
+                        int id;
                         var title = "";
-                        var longitude = "";
-                        var latitude = "";
+                        string longitude = "";
+                        string latitude = "";
                         //Marker seba = new Marker();
-                        id = reader["id"].ToString();
+                        id = (int)reader["id"];
                         title = reader["name"].ToString();
-                        longitude = reader["latitude"].ToString();
-                        latitude = reader["longitude"].ToString();
+                        longitude = reader["longitude"].ToString();
+                        latitude = reader["latitude"].ToString();
 
-                        seba.Add(new Marker { id = id, title = title, coordinates = new Coordinates() { longitude = longitude, latitude = latitude } });
+                        var c = System.Threading.Thread.CurrentThread.CurrentCulture;
+                        var s = c.NumberFormat.CurrencyDecimalSeparator;
+
+                        longitude = longitude.Replace(",", s);
+                        longitude = longitude.Replace(".", s);
+                        latitude = latitude.Replace(",", s);
+                        latitude = latitude.Replace(".", s);
+
+                        decimal longitude_pravi = Convert.ToDecimal(longitude);
+                        decimal latitude_pravi = Convert.ToDecimal(latitude);
+
+                        seba.Add(new Marker { id = id, title = title, coordinates = new Coordinates() { longitude = longitude_pravi, latitude = latitude_pravi } });
 
                     }
 
                 }
                 connection.Close();
             }
-          return seba;
+            return seba;
         }
 
 
