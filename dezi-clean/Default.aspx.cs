@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -13,25 +14,96 @@ namespace dezi_clean
 
     public partial class _Default : Page
     {
-        public string test { get; set; }
 
-        public class EventSeba
+        public class Data
         {
-            public string id { get; set; }
-            public string name;
-            public string lastname;
-            public string longitude;
-            public string latitude;
-            public string imagepath;
+            private string id;
+            private string title;
+            private string name;
+            private string lastname;
+            private string problemdescription;
+            private string longitude;
+            private string latitude;
+            private string imagepath;
 
+            public Data(string id, string title, string name, string lastname, string problemdescription, string longitude, string latitude, string imagepath)
+            {
+                this.id = id;
+                this.title = title;
+                this.name = name;
+                this.lastname = lastname;
+                this.problemdescription = problemdescription;
+                this.longitude = longitude;
+                this.latitude = latitude;
+                this.imagepath = imagepath;
+               
+            }
+            public string Id
+            {
+                get
+                {
+                    return id;
+                }
+            }
+            public string Title
+            {
+                get
+                {
+                    return title;
+                }
+            }
+            public string Name
+            {
+                get
+                {
+                    return name;
+                }
+            }
+            public string LastName
+            {
+                get
+                {
+                    return lastname;
+                }
+            }
 
+            public string Problemdescription
+            {
+                get
+                {
+                    return problemdescription;
+                }
+            }
+            public string Longitude
+            {
+                get
+                {
+                    return longitude;
+                }
+            }
+            public string Latitude
+            {
+                get
+                {
+                    return latitude;
+                }
+            }
+
+            public string Imagepath
+            {
+                get
+                {
+                    return imagepath;
+                }
+            }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-           // test = "seba";
+
+            ArrayList values = new ArrayList();
             string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
             using (SqlConnection connection = new SqlConnection(connStr))
-            using (SqlCommand command = new SqlCommand("SELECT TOP (1000) [id],[name],[lastname],[latitude],[longitude],[imagepath] FROM [dezi-me].[dbo].[Podaci]", connection))
+            using (SqlCommand command = new SqlCommand("SELECT TOP (50) [id],[title],[name],[lastname],[problemdescription],[latitude],[longitude],[imagepath],[aktivan] FROM [dezi-me].[dbo].[Data] where aktivan = 'true' order by id desc", connection))
             {
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -39,17 +111,19 @@ namespace dezi_clean
 
                     while (reader.Read())
                     {
-                        
-                        EventSeba EventSeba = new EventSeba();
-                        EventSeba.id = reader["id"].ToString();
-                        EventSeba.name = reader["name"].ToString();
-                        EventSeba.lastname = reader["lastname"].ToString();
-                        EventSeba.longitude = reader["latitude"].ToString();
-                        EventSeba.latitude = reader["longitude"].ToString();
-                        EventSeba.imagepath = reader["imagepath"].ToString();
-                        test = reader["name"].ToString();
+                        var id = reader["id"].ToString();
+                        var title = reader["title"].ToString();
+                        var name = reader["name"].ToString();
+                        var lastname = reader["lastname"].ToString();
+                        var problemdescription = reader["problemdescription"].ToString();
+                        var latitude = reader["latitude"].ToString();
+                        var longitude = reader["longitude"].ToString();
+                        var imagepath = reader["imagepath"].ToString();
+                        values.Add(new Data(id, title, name, lastname, problemdescription, longitude, latitude, imagepath));
                     }
 
+                    myCustomRepeater.DataSource = values;
+                    myCustomRepeater.DataBind();
                 }
                 connection.Close();
             }

@@ -21,6 +21,7 @@ namespace dezi_clean.Controllers
 
             var ctx = HttpContext.Current;
             var root = ctx.Server.MapPath("~/slike");
+            var relativePath = root.Substring(root.Length - 6);
 
             var provider =
                 new MultipartFormDataStreamProvider(root);
@@ -42,12 +43,13 @@ namespace dezi_clean.Controllers
                         name = name.Trim('"');
                         var localFileName = file.LocalFileName;
                         var filePath = Path.Combine(root, name);
+                        var relativePathInsert = Path.Combine(relativePath, name);
 
 
 
                         File.Move(localFileName, filePath);
 
-
+                        var naslov = provider.FormData.GetValues("naslov").FirstOrDefault();
                         var namee = provider.FormData.GetValues("ime")[0];
                         var lastname = provider.FormData.GetValues("prezime")[0];
                         var opisproblema = provider.FormData.GetValues("opis")[0];
@@ -57,13 +59,14 @@ namespace dezi_clean.Controllers
 
 
                         SqlCommand cmd = con.CreateCommand();
-                        cmd.CommandText = "INSERT INTO [dezi-me].dbo.Data VALUES( @name, @lastname,@problemdescription,@latitude, @longitude, @imagepath, @aktivan)";
+                        cmd.CommandText = "INSERT INTO [dezi-me].dbo.Data VALUES( @title,@name, @lastname,@problemdescription,@latitude, @longitude, @imagepath, @aktivan)";
+                        cmd.Parameters.AddWithValue("@title",naslov);
                         cmd.Parameters.AddWithValue("@name", namee);
                         cmd.Parameters.AddWithValue("@lastname", lastname);
                         cmd.Parameters.AddWithValue("@problemdescription", opisproblema);
                         cmd.Parameters.AddWithValue("@latitude", latitude);
                         cmd.Parameters.AddWithValue("@longitude", longitude);
-                        cmd.Parameters.AddWithValue("@imagepath", filePath);
+                        cmd.Parameters.AddWithValue("@imagepath", relativePathInsert);
                         cmd.Parameters.AddWithValue("@aktivan", aktivan);
                         cmd.ExecuteNonQuery();
                         con.Close();

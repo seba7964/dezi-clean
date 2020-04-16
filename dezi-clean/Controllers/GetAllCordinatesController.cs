@@ -36,7 +36,7 @@ namespace dezi_clean.Controllers
         {
             string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
             using (SqlConnection connection = new SqlConnection(connStr))
-            using (SqlCommand command = new SqlCommand("SELECT TOP (1000) [id],[name],[latitude],[longitude],[aktivan]FROM [dezi-me].[dbo].[Data] where aktivan = 'true'", connection))
+            using (SqlCommand command = new SqlCommand("SELECT TOP (1000) [id],[title],[latitude],[longitude],[aktivan]FROM [dezi-me].[dbo].[Data] where aktivan = 'true'", connection))
             {
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -49,7 +49,7 @@ namespace dezi_clean.Controllers
                         string latitude = "";
                         //Marker seba = new Marker();
                         id = (int)reader["id"];
-                        title = reader["name"].ToString();
+                        title = reader["title"].ToString();
                         longitude = reader["longitude"].ToString();
                         latitude = reader["latitude"].ToString();
 

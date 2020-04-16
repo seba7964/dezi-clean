@@ -2,42 +2,98 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+    
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
+        <!-- CONTENT -->
+    <h1 class="recent-post-title1">Recent Posts</h1>
+            <asp:Repeater runat="server" ID="myCustomRepeater">
+        <ItemTemplate>
+                    <div class="row">
+        <div class="content clearfix">
+            <div class="main-content">
+                
+
+                <div class="post">
+                    <img src="<%# DataBinder.Eval(Container.DataItem, "ImagePath") %>" alt="" class="post-image" />
+                    <div class="post-preview">
+                        <h2><%# DataBinder.Eval(Container.DataItem, "Title") %></h2>
+                        <i class="fa fa-user" style="color:black"><%# DataBinder.Eval(Container.DataItem, "Name") %> <%# DataBinder.Eval(Container.DataItem, "Lastname") %></i>
+                        &nbsp;
+                        <i class="fa fa-calendar">Mar 11, 2019</i>
+                        <p class="preview-text"><%# DataBinder.Eval(Container.DataItem, "Problemdescription") %></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-            <p><%= test.ToString() %></p>
-        </div>
-    </div>
+                </div>
+
+        </ItemTemplate>
+
+    </asp:Repeater>
+
+        <%--  <div class="siderbar"></div>--%>
+
+
+    <!-- CONTENTEND -->
+
+
+
+    <style>
+        .content {
+            width: 90%;
+            margin: 30px auto 30px;
+            border: 1px solid red;
+        }
+
+        .recent-post-title1 {
+            margin-left:40px;
+        }
+
+            .content .main-content {
+                width: 100%;
+                float: left;
+                border: 1px solid blue;
+            }
+
+            .content .main-content .post {
+                width: 95%;
+                height: 270px;
+                margin: 10px auto;
+                border-radius: 5px;
+                background:white;
+
+            }
+
+            .content .main-content .post .post-image {
+                width: 40%;
+                height:100%;
+                float:left;
+            }
+
+            .content .main-content .post .post-preview {
+                padding: 10px;
+                width: 60%;
+                float: right;
+            }
+
+            .content .main-content .recent-post-title {
+                margin: 20px;
+
+            }
+
+            .content .siderbar {
+                width: 30%;
+                float: left;
+                border: 1px dashed green;
+                height: 300px;
+            }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+    </style>
 
 </asp:Content>
+

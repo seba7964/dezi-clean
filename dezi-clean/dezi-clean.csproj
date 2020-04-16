@@ -194,6 +194,17 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="slike\0423EC72-CD55-4D59-AC29-D44483ABB139.png" />
+    <Content Include="slike\0C39E2EE-92AD-4FB8-A3BC-3E7F391D6D6C.jpg" />
+    <Content Include="slike\104F64D9-61E8-4694-BA84-2A37C935EBDD.jpg" />
+    <Content Include="slike\197019E5-83E3-45BF-B614-3E458494C1B5.jpg" />
+    <Content Include="slike\741726B4-D7EB-462C-B986-6B06D91C290A.jpg" />
+    <Content Include="slike\9A528354-5C44-4B0E-95B5-CD6E060F9EC6.jpg" />
+    <Content Include="slike\A21F5428-0BF3-4E8F-ADB1-66A48C40DD4A.png" />
+    <Content Include="slike\A4E7C04C-0145-4427-AC5D-84B786E7C578.jpg" />
+    <Content Include="slike\CC8EE315-BF67-43CC-A640-72F3552151D1.jpg" />
+    <Content Include="slike\DEA5156A-2548-41CE-AD7A-690AB5EC9062.jpg" />
+    <Content Include="slike\nwl_form_subscription.png" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -255,12 +266,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="slike\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="slike\BodyPart_99bfb241-3f44-4c00-96d1-89a6c864d139" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
