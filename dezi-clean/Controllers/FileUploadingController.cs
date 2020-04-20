@@ -49,17 +49,19 @@ namespace dezi_clean.Controllers
 
                         File.Move(localFileName, filePath);
 
+                        var kategorija = provider.FormData.GetValues("kategorija").FirstOrDefault();
                         var naslov = provider.FormData.GetValues("naslov").FirstOrDefault();
-                        var namee = provider.FormData.GetValues("ime")[0];
-                        var lastname = provider.FormData.GetValues("prezime")[0];
-                        var opisproblema = provider.FormData.GetValues("opis")[0];
-                        var latitude = provider.FormData.GetValues("latitude")[0];
-                        var longitude = provider.FormData.GetValues("longitude")[0];
+                        var namee = provider.FormData.GetValues("ime").FirstOrDefault();
+                        var lastname = provider.FormData.GetValues("prezime").FirstOrDefault();
+                        var opisproblema = provider.FormData.GetValues("opis").FirstOrDefault();
+                        var latitude = provider.FormData.GetValues("latitude").FirstOrDefault();
+                        var longitude = provider.FormData.GetValues("longitude").FirstOrDefault();
+                        var datum = DateTime.Now.ToString("d/M/yyyy");
                         var aktivan = "true";
 
 
                         SqlCommand cmd = con.CreateCommand();
-                        cmd.CommandText = "INSERT INTO [dezi-me].dbo.Data VALUES( @title,@name, @lastname,@problemdescription,@latitude, @longitude, @imagepath, @aktivan)";
+                        cmd.CommandText = "INSERT INTO [dezi-me].dbo.Data VALUES( @title,@name, @lastname,@problemdescription,@latitude, @longitude, @imagepath,@date, @aktivan)";
                         cmd.Parameters.AddWithValue("@title",naslov);
                         cmd.Parameters.AddWithValue("@name", namee);
                         cmd.Parameters.AddWithValue("@lastname", lastname);
@@ -67,6 +69,7 @@ namespace dezi_clean.Controllers
                         cmd.Parameters.AddWithValue("@latitude", latitude);
                         cmd.Parameters.AddWithValue("@longitude", longitude);
                         cmd.Parameters.AddWithValue("@imagepath", relativePathInsert);
+                        cmd.Parameters.AddWithValue("@date", datum);
                         cmd.Parameters.AddWithValue("@aktivan", aktivan);
                         cmd.ExecuteNonQuery();
                         con.Close();

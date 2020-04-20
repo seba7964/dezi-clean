@@ -25,8 +25,9 @@ namespace dezi_clean
             private string longitude;
             private string latitude;
             private string imagepath;
+            private string date;
 
-            public Data(string id, string title, string name, string lastname, string problemdescription, string longitude, string latitude, string imagepath)
+            public Data(string id, string title, string name, string lastname, string problemdescription, string longitude, string latitude, string imagepath, string date)
             {
                 this.id = id;
                 this.title = title;
@@ -36,6 +37,7 @@ namespace dezi_clean
                 this.longitude = longitude;
                 this.latitude = latitude;
                 this.imagepath = imagepath;
+                this.date = date;
                
             }
             public string Id
@@ -96,6 +98,14 @@ namespace dezi_clean
                     return imagepath;
                 }
             }
+
+            public string Date
+            {
+                get
+                {
+                    return date;
+                }
+            }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -103,7 +113,7 @@ namespace dezi_clean
             ArrayList values = new ArrayList();
             string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
             using (SqlConnection connection = new SqlConnection(connStr))
-            using (SqlCommand command = new SqlCommand("SELECT TOP (50) [id],[title],[name],[lastname],[problemdescription],[latitude],[longitude],[imagepath],[aktivan] FROM [dezi-me].[dbo].[Data] where aktivan = 'true' order by id desc", connection))
+            using (SqlCommand command = new SqlCommand("SELECT TOP (50) [id],[title],[name],[lastname],[problemdescription],[latitude],[longitude],[imagepath],[date],[aktivan] FROM [dezi-me].[dbo].[Data] where aktivan = 'true' order by id desc", connection))
             {
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -119,7 +129,8 @@ namespace dezi_clean
                         var latitude = reader["latitude"].ToString();
                         var longitude = reader["longitude"].ToString();
                         var imagepath = reader["imagepath"].ToString();
-                        values.Add(new Data(id, title, name, lastname, problemdescription, longitude, latitude, imagepath));
+                        var date = reader["date"].ToString();
+                        values.Add(new Data(id, title, name, lastname, problemdescription, longitude, latitude, imagepath, date));
                     }
 
                     myCustomRepeater.DataSource = values;

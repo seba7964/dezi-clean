@@ -19,7 +19,7 @@
                         <h2><%# DataBinder.Eval(Container.DataItem, "Title") %></h2>
                         <i class="fa fa-user" style="color:black"><%# DataBinder.Eval(Container.DataItem, "Name") %> <%# DataBinder.Eval(Container.DataItem, "Lastname") %></i>
                         &nbsp;
-                        <i class="fa fa-calendar">Mar 11, 2019</i>
+                        <i class="fa fa-calendar"><%# DataBinder.Eval(Container.DataItem, "Date") %></i>
                         <p class="preview-text"><%# DataBinder.Eval(Container.DataItem, "Problemdescription") %></p>
                     </div>
                 </div>
