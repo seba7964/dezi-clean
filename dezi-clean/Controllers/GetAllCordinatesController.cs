@@ -17,6 +17,8 @@ namespace dezi_clean.Controllers
     {
         public int id { get; set; }
         public string title { get; set; }
+
+        public string color { get; set; }
         public Coordinates coordinates { get; set; }
 
     }
@@ -36,7 +38,7 @@ namespace dezi_clean.Controllers
         {
             string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
             using (SqlConnection connection = new SqlConnection(connStr))
-            using (SqlCommand command = new SqlCommand("SELECT TOP (1000) [id],[title],[latitude],[longitude],[aktivan]FROM [dezi-me].[dbo].[Data] where aktivan = 'true'", connection))
+            using (SqlCommand command = new SqlCommand("SELECT TOP (1000) [id],[title],[latitude],[longitude],[aktivan], [color] FROM [dezi-me].[dbo].[Data] where aktivan = 'true'", connection))
             {
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -47,12 +49,13 @@ namespace dezi_clean.Controllers
                         var title = "";
                         string longitude = "";
                         string latitude = "";
+                        string color = "";
                         //Marker seba = new Marker();
                         id = (int)reader["id"];
                         title = reader["title"].ToString();
                         longitude = reader["longitude"].ToString();
                         latitude = reader["latitude"].ToString();
-
+                        color = reader["color"].ToString();
                         var c = System.Threading.Thread.CurrentThread.CurrentCulture;
                         var s = c.NumberFormat.CurrencyDecimalSeparator;
 
@@ -64,7 +67,7 @@ namespace dezi_clean.Controllers
                         decimal longitude_pravi = Convert.ToDecimal(longitude);
                         decimal latitude_pravi = Convert.ToDecimal(latitude);
 
-                        seba.Add(new Marker { id = id, title = title, coordinates = new Coordinates() { longitude = longitude_pravi, latitude = latitude_pravi } });
+                        seba.Add(new Marker { id = id, title = title, color = color, coordinates = new Coordinates() { longitude = longitude_pravi, latitude = latitude_pravi } });
 
                     }
 

@@ -49,7 +49,8 @@ namespace dezi_clean.Controllers
 
                         File.Move(localFileName, filePath);
 
-                        var kategorija = provider.FormData.GetValues("kategorija").FirstOrDefault();
+                        
+                        
                         var naslov = provider.FormData.GetValues("naslov").FirstOrDefault();
                         var namee = provider.FormData.GetValues("ime").FirstOrDefault();
                         var lastname = provider.FormData.GetValues("prezime").FirstOrDefault();
@@ -57,11 +58,13 @@ namespace dezi_clean.Controllers
                         var latitude = provider.FormData.GetValues("latitude").FirstOrDefault();
                         var longitude = provider.FormData.GetValues("longitude").FirstOrDefault();
                         var datum = DateTime.Now.ToString("d/M/yyyy");
+                        var kategorija = provider.FormData.GetValues("kategorija").FirstOrDefault().ToLower();
+                        var boja = defineColor(kategorija);
                         var aktivan = "true";
 
 
                         SqlCommand cmd = con.CreateCommand();
-                        cmd.CommandText = "INSERT INTO [dezi-me].dbo.Data VALUES( @title,@name, @lastname,@problemdescription,@latitude, @longitude, @imagepath,@date, @aktivan)";
+                        cmd.CommandText = "INSERT INTO [dezi-me].dbo.Data VALUES( @title,@name, @lastname,@problemdescription,@latitude, @longitude, @imagepath,@date,@category,@color,@aktivan)";
                         cmd.Parameters.AddWithValue("@title",naslov);
                         cmd.Parameters.AddWithValue("@name", namee);
                         cmd.Parameters.AddWithValue("@lastname", lastname);
@@ -70,6 +73,8 @@ namespace dezi_clean.Controllers
                         cmd.Parameters.AddWithValue("@longitude", longitude);
                         cmd.Parameters.AddWithValue("@imagepath", relativePathInsert);
                         cmd.Parameters.AddWithValue("@date", datum);
+                        cmd.Parameters.AddWithValue("@category", kategorija);
+                        cmd.Parameters.AddWithValue("@color", boja);
                         cmd.Parameters.AddWithValue("@aktivan", aktivan);
                         cmd.ExecuteNonQuery();
                         con.Close();
@@ -81,7 +86,26 @@ namespace dezi_clean.Controllers
             {
                 return $"Error: {e.Message}";
             }
-            return "File uploaded!";
+            return "Uspješno ste prijavili problem!";
+
+        }
+
+        private string defineColor (string boja)
+        {
+            switch(boja) 
+            {
+                //crvena
+                case "dezinfekcija":
+                    return "#FF0000";
+                //zelena
+                case "dezinsekcija":
+                    return "#008000";
+                //plava
+                case "deratizacija":
+                    return "#0000FF";
+
+                default: return "#FF0000";
+            }
 
         }
     }

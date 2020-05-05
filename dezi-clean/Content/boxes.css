@@ -1,0 +1,59 @@
+﻿.content {
+    width: 90%;
+    margin: 30px auto 30px;
+    border: 1px solid red;
+}
+
+.recent-post-title1 {
+    margin-left: 40px;
+}
+
+.content .main-content {
+    width: 100%;
+    float: left;
+    border: 1px solid blue;
+}
+
+    .content .main-content .post {
+        width: 95%;
+        height: 270px;
+        margin: 10px auto;
+        border-radius: 5px;
+        background: white;
+    }
+
+        .content .main-content .post .post-image {
+            width: 40%;
+            height: 100%;
+            float: left;
+        }
+
+        .content .main-content .post .post-preview {
+            padding: 10px;
+            width: 60%;
+            float: right;
+        }
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+    .content .main-content .post .post-preview {
+        width: 50%;
+    }
+}
+
+    .content .main-content .recent-post-title {
+        margin: 20px;
+    }
+
+.content .siderbar {
+    width: 30%;
+    float: left;
+    border: 1px dashed green;
+    height: 300px;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
