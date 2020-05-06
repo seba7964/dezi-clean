@@ -118,6 +118,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin.aspx" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\AspNet.ScriptManager.bootstrap.dll" />
@@ -151,6 +152,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Deratizacija.aspx" />
+    <Content Include="Dezinfekcija.aspx" />
     <Content Include="Dezinsekcija.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -166,6 +168,8 @@
     <Content Include="bin\dezi-clean.dll.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Images\background.jpg" />
+    <Content Include="Images\linear-gradient.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -212,6 +216,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -231,6 +242,13 @@
     </Compile>
     <Compile Include="Deratizacija.aspx.designer.cs">
       <DependentUpon>Deratizacija.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dezinfekcija.aspx.cs">
+      <DependentUpon>Dezinfekcija.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dezinfekcija.aspx.designer.cs">
+      <DependentUpon>Dezinfekcija.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dezinsekcija.aspx.cs">
       <DependentUpon>Dezinsekcija.aspx</DependentUpon>

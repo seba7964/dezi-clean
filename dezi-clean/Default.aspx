@@ -2,38 +2,89 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    
+        <style>
+            body {
+                background-image: url(../Images/linear-gradient.png);
+                font-family: Arial, Helvetica, sans-serif;
+            }
 
-        <!-- CONTENT -->
-    <h1 class="recent-post-title1">Recent Posts</h1>
-            <asp:Repeater runat="server" ID="myCustomRepeater">
-        <ItemTemplate>
-                    <div class="row">
-        <div class="content clearfix">
-            <div class="main-content">
-                
+            .buttonLogin {
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
 
-                <div class="post">
-                    <img src="<%# DataBinder.Eval(Container.DataItem, "ImagePath") %>" alt="" class="post-image" />
-                    <div class="post-preview">
-                        <h2><%# DataBinder.Eval(Container.DataItem, "Title") %></h2>
-                        <i class="fa fa-user" style="color:black"><%# DataBinder.Eval(Container.DataItem, "Name") %> <%# DataBinder.Eval(Container.DataItem, "Lastname") %></i>
-                        &nbsp;
-                        <i class="fa fa-calendar" style="font-size:unset"><%# DataBinder.Eval(Container.DataItem, "Date") %></i>
-                        <p class="preview-text"><%# DataBinder.Eval(Container.DataItem, "Problemdescription") %></p>
-                    </div>
-                </div>
-            </div>
+            .buttonRedirect {
+                background-color: #313dc4;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            .buttonRedirect {
+                opacity: 0.8;
+            }
+            .buttonLogin:hover {
+                opacity: 0.8;
+            }
+
+            .inputs {
+                  width: 100%;
+                    padding: 12px 20px;
+                    margin: 8px 0;
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                        box-sizing: border-box;
+            }
+        </style>
+       
+            <div>
+            <table style="margin: auto; border: 5px red;">
+                <%--Prvi--%>
+                <tr>
+                    <td>
+                        <b><asp:Label ID="Label1" runat="server" Text="Username"></asp:Label></b>&nbsp;
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtUserName" CssClass="inputs" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <%--Drugi--%>
+                <tr>
+                    <td>
+                        <b><asp:Label ID="Label2" runat="server" Text="Password"></asp:Label></b>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPassword" CssClass="inputs" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <%--Treci--%>
+                <tr>
+                    <td></td>
+                    <td>
+                        <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Login" CssClass="buttonLogin" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <asp:Label ID="lblErrorMessage" runat="server" Text="Neispravni korisnički podaci, pokušajte ponovno!" ForeColor="Red"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <asp:Button ID="Button2" runat="server" OnClick="btnRedirect_Click" CssClass="buttonRedirect" Text="Nastavi kao gost" />
+                    </td>
+                </tr>
+            </table>
         </div>
-                </div>
-
-        </ItemTemplate>
-
-    </asp:Repeater>
-
-        <%--  <div class="siderbar"></div>--%>
-
-
-    <!-- CONTENTEND -->
 </asp:Content>
 

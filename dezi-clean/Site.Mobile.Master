@@ -37,6 +37,7 @@
             </Scripts>
         </asp:ScriptManager>
 
+        <asp:PlaceHolder ID="mojplaceholder" runat="server" Visible="true">
                 <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header" style="color: green">
@@ -56,6 +57,7 @@
                 </div>
             </div>
         </div>
+            </asp:PlaceHolder>
 
     <div>
         <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />

@@ -39,6 +39,7 @@
             </Scripts>
         </asp:ScriptManager>
 
+        <asp:PlaceHolder ID="mojplaceholder" runat="server" Visible="true">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -58,13 +59,16 @@
                 </div>
             </div>
         </div>
+            </asp:PlaceHolder>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
+            <asp:PlaceHolder ID="hideFooter" runat="server">
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
             </footer>
+             </asp:PlaceHolder>
         </div>
 
     </form>
