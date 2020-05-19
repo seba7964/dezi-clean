@@ -18,7 +18,7 @@ namespace dezi_clean
         {
 
             ArrayList values = new ArrayList();
-            values = GetDataFromDB.GetDataForBind("dezinfekcija");
+            values = GetDataFromDB.GetDataForBind("='dezinfekcija'");
 
 
             myCustomRepeater.DataSource = values;

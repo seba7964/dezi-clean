@@ -14,7 +14,7 @@ namespace dezi_clean
         protected void Page_Load(object sender, EventArgs e)
         {
             ArrayList values = new ArrayList();
-            values = GetDataFromDB.GetDataForBind("deratizacija");
+            values = GetDataFromDB.GetDataForBind("='deratizacija'");
 
 
             myCustomRepeater.DataSource = values;

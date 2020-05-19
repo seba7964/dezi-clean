@@ -1,7 +1,7 @@
 ﻿.content {
     width: 90%;
     margin: 30px auto 30px;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 
 .recent-post-title1 {
@@ -11,7 +11,7 @@
 .content .main-content {
     width: 100%;
     float: left;
-    border: 1px solid blue;
+    border: 0.5px solid lightgray;
 }
 
     .content .main-content .post {
