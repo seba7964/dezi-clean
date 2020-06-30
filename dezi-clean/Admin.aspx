@@ -4,15 +4,28 @@
     <style>
 
 
-            .buttonLogin {
-                background-color: #4CAF50;
-                color: white;
-                padding: 14px 20px;
-                margin: 8px 0;
-                border: none;
-                cursor: pointer;
-                width: 100%;
-            }
+        .buttonLogout {
+            background-color:cornflowerblue;
+            color: black;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 80%;
+            float:right;
+            margin-right: 45px;
+            margin-top: 25px;
+        }
+
+        .buttonLogin {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
 
             .buttonRedirect {
                 background-color: #313dc4;
@@ -38,6 +51,7 @@
             opacity: 0.8;
         }
 
+
         .buttonLogin:hover {
             opacity: 0.8;
         }
@@ -52,8 +66,9 @@
         }
         </style>
 
-
-        <h1 class="recent-post-title1">Recent Posts</h1>
+        <asp:Button ID="Button5" runat="server" OnClick="btnRedirect_Logout"  CssClass="buttonLogout" Text="Logout" />
+        
+    <h1 class="recent-post-title1">Najnovije prijave</h1>
             <asp:Repeater runat="server" ID="myCustomRepeater">
         <ItemTemplate>
                     <div class="row">

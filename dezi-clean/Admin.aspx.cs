@@ -67,5 +67,11 @@ namespace dezi_clean
             }
 
         }
+
+        protected void btnRedirect_Logout(object sender, EventArgs e)
+        {
+            Session["username"] = null;
+            Response.Redirect("Default.aspx");
+        }
     }
 }

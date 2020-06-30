@@ -18,39 +18,27 @@ namespace dezi_clean.Controllers
         [Route("api/FileUploading/UploadFile")]
         public async Task<string> UploadFile()
         {
-
             var ctx = HttpContext.Current;
             var root = ctx.Server.MapPath("~/slike");
             var relativePath = root.Substring(root.Length - 6);
-
-            var provider =
-                new MultipartFormDataStreamProvider(root);
-
+            var provider = new MultipartFormDataStreamProvider(root);
             try
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
-
                 string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(connStr);
                 con.Open();
                 {
                     foreach (var file in provider.FileData)
                     {
-
-
                         var name = file.Headers.ContentDisposition.FileName;
                         //Remove dobule quotes from string
                         name = name.Trim('"');
                         var localFileName = file.LocalFileName;
                         var filePath = Path.Combine(root, name);
                         var relativePathInsert = Path.Combine(relativePath, name);
-
-
-
                         File.Move(localFileName, filePath);
 
-                        
-                        
                         var naslov = provider.FormData.GetValues("naslov").FirstOrDefault();
                         var namee = provider.FormData.GetValues("ime").FirstOrDefault();
                         var lastname = provider.FormData.GetValues("prezime").FirstOrDefault();
@@ -61,7 +49,6 @@ namespace dezi_clean.Controllers
                         var kategorija = provider.FormData.GetValues("kategorija").FirstOrDefault().ToLower();
                         var boja = defineColor(kategorija);
                         var aktivan = "true";
-
 
                         SqlCommand cmd = con.CreateCommand();
                         cmd.CommandText = "INSERT INTO [dezi-me].dbo.Data VALUES( @title,@name, @lastname,@problemdescription,@latitude, @longitude, @imagepath,@date,@category,@color,@aktivan)";
@@ -87,7 +74,6 @@ namespace dezi_clean.Controllers
                 return $"Error: {e.Message}";
             }
             return "Uspješno ste prijavili problem!";
-
         }
 
         private string defineColor (string boja)

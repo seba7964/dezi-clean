@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dezinsekcija.aspx.cs" Inherits="dezi_clean.Dezinsekcija" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <!-- CONTENT -->
-    <h1 class="recent-post-title1">Recent Posts</h1>
+    <h1 class="recent-post-title1">Najnovije prijave</h1>
             <asp:Repeater runat="server" ID="myCustomRepeater">
         <ItemTemplate>
                     <div class="row">

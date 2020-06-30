@@ -33,7 +33,7 @@ namespace dezi_clean.Controllers
     public class GetAllCordinatesController : ApiController
     {
         //Student[] students = new Student[]
-        List<Marker> seba = new List<Marker>();
+        List<Marker> AllMarkers = new List<Marker>();
         public List<Marker> FillData()
         {
             string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
@@ -67,21 +67,22 @@ namespace dezi_clean.Controllers
                         decimal longitude_pravi = Convert.ToDecimal(longitude);
                         decimal latitude_pravi = Convert.ToDecimal(latitude);
 
-                        seba.Add(new Marker { id = id, title = title, color = color, coordinates = new Coordinates() { longitude = longitude_pravi, latitude = latitude_pravi } });
+                        AllMarkers.Add(new Marker { id = id, title = title, color = color, coordinates = new Coordinates() { longitude = longitude_pravi, latitude = latitude_pravi } });
 
                     }
 
                 }
                 connection.Close();
             }
-            return seba;
+            return AllMarkers;
         }
 
 
         [HttpGet]
         [Route("api/GetLocation/Location")]
-        public HttpResponseMessage GetAllMessages(List<Marker> data)
+        public HttpResponseMessage CreateJSONData()
         {
+            List<Marker> data = new List<Marker>();
             data = FillData();
             var jsonmsg = JsonConvert.SerializeObject(data);
             var res = Request.CreateResponse(HttpStatusCode.OK);

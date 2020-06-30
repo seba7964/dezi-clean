@@ -37,9 +37,10 @@ namespace dezi_clean.Controllers
         }
         public static ArrayList GetDataForBind(string kategorija)
         {
-
             ArrayList values = new ArrayList();
-            string sqlquery = String.Format("SELECT TOP (1000) [id],[title],[name],[lastname],[problemdescription],[latitude],[longitude],[imagepath],[date],[category],[color],[aktivan] FROM [dezi-me].[dbo].[Data] where aktivan = 'true' and category {0} order by id desc", kategorija);
+            string sqlquery = String.Format("SELECT TOP (1000) [id],[title],[name],[lastname],[problemdescription],[latitude],[longitude],[imagepath],[date],[category],[color],[aktivan] " +
+                "FROM [dezi-me].[dbo].[Data]" +
+                " where aktivan = 'true' and category {0} order by id desc", kategorija);
             string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString + "MultipleActiveResultSets=true";
             using (SqlConnection connection = new SqlConnection(connStr))
             using (SqlCommand command = new SqlCommand(sqlquery, connection))
